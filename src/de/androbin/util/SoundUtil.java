@@ -19,7 +19,7 @@ public final class SoundUtil {
       final Clip sound = AudioSystem.getClip();
       sound.open( audioIn );
       return sound;
-    } catch ( final IOException | UnsupportedAudioFileException | LineUnavailableException e ) {
+    } catch ( final IOException | LineUnavailableException | UnsupportedAudioFileException e ) {
       return null;
     }
   }

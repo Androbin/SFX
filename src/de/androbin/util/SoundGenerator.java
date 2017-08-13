@@ -23,15 +23,12 @@ public final class SoundGenerator {
   }
   
   public static double[] tone( final double hz, final double duration ) {
-    final double amplitude = 1.0;
-    final int N = (int) ( 44100 * duration );
+    final double[] pcm = new double[ (int) ( 44100 * duration ) + 1 ];
     
-    final double[] a = new double[ N + 1 ];
-    
-    for ( int i = 0; i <= N; i++ ) {
-      a[ i ] = amplitude * Math.sin( 2 * Math.PI * i * hz / 44100 );
+    for ( int i = 0; i < pcm.length; i++ ) {
+      pcm[ i ] = Math.sin( 2 * Math.PI * i * hz / 44100 );
     }
     
-    return a;
+    return pcm;
   }
 }
