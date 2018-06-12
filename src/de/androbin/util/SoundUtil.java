@@ -2,7 +2,7 @@ package de.androbin.util;
 
 import de.androbin.io.*;
 import java.io.*;
-import java.net.*;
+import java.nio.file.*;
 import javax.sound.sampled.*;
 
 public final class SoundUtil {
@@ -10,13 +10,14 @@ public final class SoundUtil {
   }
   
   public static Clip loadClip( final String path ) {
-    final URL res = DynamicClassLoader.get().getResource( "sfx/" + path );
+    final Path file = DynamicClassLoader.getPath( "sfx/" + path );
     
-    if ( res == null ) {
+    if ( file == null ) {
       return null;
     }
     
-    try ( final AudioInputStream audioIn = AudioSystem.getAudioInputStream( res ) ) {
+    try ( final AudioInputStream audioIn = AudioSystem
+        .getAudioInputStream( Files.newInputStream( file ) ) ) {
       final Clip sound = AudioSystem.getClip();
       sound.open( audioIn );
       return sound;
